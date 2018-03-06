@@ -10,7 +10,7 @@ module.exports = {
 
     }, // a function which produces all the messages
     post: function (message, callback) {
-      var queryString = 'INSERT INTO messages (message, roomname, user_id) VALUE (?,?,(select id from users where username= ?))';
+      var queryString = 'INSERT INTO messages (message, user_id, roomname) VALUE (?,(select id from users where username= ? limit 1),?)';
 
       db.query(queryString, message, function(err, data){
         callback(err, data);
@@ -25,7 +25,6 @@ module.exports = {
       db.query(queryString, function(err, data) {
         callback(err, data);
         })
-
 
     }, //get
     post: function (user, callback) {

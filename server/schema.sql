@@ -5,7 +5,7 @@ CREATE DATABASE chat;
 USE chat;
 
 DROP TABLE IF EXISTS `users`;
-    
+
 CREATE TABLE `users` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(20) NOT NULL,
@@ -14,12 +14,12 @@ CREATE TABLE `users` (
 
 
 -- DROP TABLE IF EXISTS `messages`;
-    
+
 CREATE TABLE `messages` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `message` VARCHAR(150) NOT NULL,
-  `user_id` INTEGER NOT NULL,
-  `roomname` VARCHAR(20) NOT NULL,
+  `text` VARCHAR(150) NOT NULL,
+  `user_id` INTEGER,
+  `roomname` VARCHAR(20),
   PRIMARY KEY (`id`)
 );
 

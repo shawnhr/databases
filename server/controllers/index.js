@@ -3,15 +3,15 @@ var models = require('../models');
 module.exports = {
   messages: {
     get: function (req, res) {
-      console.log('G_req=======', req.body);
       models.messages.get(function(err, results){
         if (err){console.log(err)}
-        res.json(results);
+        console.log('RESULTS====>', results);
+        res.json({results: results});
       })
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('post request ====>', req.body);
-      var messages = [req.body.message, req.body.username, req.body.roomname];
+      console.log('request.body======>', req.body);
+      var messages = [req.body.text, req.body.username, req.body.roomname];
       models.messages.post(messages, function(err, results) {
         if (err){console.error(err)};
         res.sendStatus(201);
@@ -24,7 +24,7 @@ module.exports = {
     get: function (req, res) {
       models.users.get(function(err, results){
         if (err){console.error(err)};
-        res.json(results);
+        res.json({results: results});
       });
     },
     post: function (req, res) {

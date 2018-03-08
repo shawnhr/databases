@@ -3,15 +3,16 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function (callback) {
-      var queryString = 'SELECT  m.message, u.username, m.roomname FROM messages m INNER JOIN users u ON (u.id = m.user_id)';
+      var queryString = 'SELECT  m.text, m.roomname FROM messages m'
+      //var queryString = 'SELECT * FROM messages';
       db.query(queryString, function(err, data) {
+          console.log('DATA FROM GET MODEL ===>', data)
           callback(err, data);
       })
 
     }, // a function which produces all the messages
     post: function (message, callback) {
-      var queryString = 'INSERT INTO messages (message, user_id, roomname) VALUE (?,(select id from users where username= ? limit 1),?)';
-
+      var queryString = 'INSERT INTO messages (text, user_id, roomname) VALUE (?,(select id from users where username= ? limit 1),?)';
       db.query(queryString, message, function(err, data){
         callback(err, data);
       })
